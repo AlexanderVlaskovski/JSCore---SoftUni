@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Town by Name</title>
+    <style>select, input { width: 100px }</style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body onload="attachEvents()">
+<div>Towns</div>
+<select id="towns" size="4">
+    <option>Sofia</option>
+    <option>Sofia</option>
+    <option>Pleven</option>
+</select>
+<div>
+    <input type="text" id="townName" />
+    <button id="btnDelete">Delete</button>
+</div>
+<div id="result"></div>
+<script>
+    function attachEvents() {
+        $(`#btnDelete`).click(function () {
+
+            let inputText = $(`#townName`);
+            let toRemove = $('#towns option').filter(function () { return $(this).html() === `${inputText.val()}`; });
+            let result = '';
+            if(toRemove.length > 0){
+                toRemove.remove();
+                let arr = toRemove.toArray();
+                for(let i = 0; i <arr.length; i++){
+                    let deletedTown = arr[i].innerHTML;
+                    result += deletedTown + ' deleted.'
+                    break;
+                }
+            }
+            else{
+                result = `${inputText.val()} not found.`
+
+            }
+            $(`#result`).text(result);
+            inputText.val('');
+        })
+    }
+</script>
+</body>
+</html>
